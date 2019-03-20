@@ -7,10 +7,12 @@ import { AuthModule } from './modules/auth/auth.module';
 import { NavComponent } from './components/nav/nav.component';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent
+    NavComponent,
   ],
   imports: [
     BrowserModule,
