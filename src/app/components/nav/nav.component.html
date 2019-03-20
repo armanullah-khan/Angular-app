@@ -1,0 +1,15 @@
+
+<header>
+  <div class="container">
+    <a routerLink="/" class="logo">{{ appTitle }}</a>
+    <div *ngIf="isAuthenticated; then doSomething; else doSomethingElse;"></div>
+   <ng-template #doSomethingElse>
+    <nav>
+      <ul>
+        <li><a routerLink="/log-in">Log-In</a></li>
+        <li><a routerLink="/sign-up">Sign-Up</a></li>
+      </ul>
+    </nav>
+  </ng-template>
+  </div>
+</header>
