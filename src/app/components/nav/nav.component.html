@@ -2,14 +2,14 @@
 <header>
   <div class="container">
     <a routerLink="/" class="logo">{{ appTitle }}</a>
-    
-   
+    <div *ngIf="!isAuthenticated; then doSomething;"></div>
+   <ng-template #doSomething>
     <nav>
       <ul>
         <li><a routerLink="/login">Log-In</a></li>
         <li><a routerLink="/signup">Sign-Up</a></li>
       </ul>
     </nav>
-  
+   </ng-template>
   </div>
 </header>

@@ -41,6 +41,10 @@
   
       <input type="submit" value="Submit" [disabled]="messageForm.invalid" class="btn btn-primary">
     </form>
+    <div *ngIf="errorMessage">
+      <div class="alert alert-danger" role="alert">
+        {{errorMessage}}
+      </div>
 
   
   </div>

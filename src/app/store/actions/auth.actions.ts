@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { User } from 'src/app/models/user';
 
 
 export enum AuthActionTypes {
@@ -14,17 +15,23 @@ export enum AuthActionTypes {
   
   export class LogIn implements Action {
     readonly type = AuthActionTypes.LOGIN;
-    constructor(public payload: any) {}
+    constructor(public payload: User) {
+      console.log('action Login', payload)
+    }
   }
   
   export class LogInSuccess implements Action {
     readonly type = AuthActionTypes.LOGIN_SUCCESS;
-    constructor(public payload: any) {}
+    constructor(public payload: User) {
+      console.log('action success', payload) 
+    }
   }
   
   export class LogInFailure implements Action {
     readonly type = AuthActionTypes.LOGIN_FAILURE;
-    constructor(public payload: any) {}
+    constructor(public payload: any) {
+      console.log('action failure', payload)
+    }
   }
   
   export class SignUp implements Action {

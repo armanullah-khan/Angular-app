@@ -45,7 +45,10 @@
           <a [routerLink]="['/signup']">Sign up!</a>
         </p>
     </form>
-
+    <div *ngIf="errorMessage">
+      <div class="alert alert-danger" role="alert">
+        {{errorMessage}}
+      </div>
   
   </div>
   </div>
