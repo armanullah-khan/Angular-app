@@ -6,6 +6,7 @@ import { SignupComponent } from './signup/signup.component';
 const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "signup", component: SignupComponent},
+  { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({

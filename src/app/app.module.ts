@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './modules/auth/auth.module';
 import { NavComponent } from './components/nav/nav.component';
+import { LandingComponent } from './components/landing/landing.component';
+
 
 
 
@@ -12,6 +14,7 @@ import { NavComponent } from './components/nav/nav.component';
   declarations: [
     AppComponent,
     NavComponent,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,
