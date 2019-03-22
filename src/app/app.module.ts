@@ -12,6 +12,8 @@ import { AuthEffects } from './store/effects/auth.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.state';
+import { StatusComponent } from './components/status/status.component';
+
 
 
 
@@ -20,6 +22,7 @@ import { reducers } from './store/app.state';
     AppComponent,
     NavComponent,
     LandingComponent,
+    StatusComponent,
   ],
   imports: [
     BrowserModule,
