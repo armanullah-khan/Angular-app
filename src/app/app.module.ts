@@ -7,13 +7,14 @@ import { AuthModule } from './modules/auth/auth.module';
 import { NavComponent } from './components/nav/nav.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { AuthService } from './services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthEffects } from './store/effects/auth.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.state';
 import { StatusComponent } from './components/status/status.component';
-
+import { TokenInterceptor, ErrorInterceptor } from './services/token.interceptor';
+import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 
 
 
@@ -32,7 +33,20 @@ import { StatusComponent } from './components/status/status.component';
     EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(reducers, {}),
   ],
-  providers: [AuthService],
+  providers: [ 
+    AuthService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
