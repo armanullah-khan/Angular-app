@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
-import { LogIn } from 'src/app/store/actions/auth.actions';
+import { LogIn, SignUp } from 'src/app/store/actions/auth.actions';
 import { Store } from '@ngrx/store';
 import { AppState, selectAuthState } from 'src/app/store/app.state';
 import { Observable } from 'rxjs/Observable';
@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
       email: this.user.email,
       password: this.user.password
     };
-    this.store.dispatch(new LogIn(payload));
+    this.store.dispatch(new SignUp(payload));
     
     console.log(this.user)
     if (this.messageForm.invalid) {

@@ -15,6 +15,8 @@ import {
   LogIn, LogInSuccess, LogInFailure,
   SignUp, SignUpSuccess, SignUpFailure
 } from '../actions/auth.actions';
+import { ApiResponse } from 'src/app/models/api-response';
+import { User } from 'src/app/models/user';
 
 
 
@@ -28,12 +30,13 @@ export class AuthEffects {
   ) {}
 
   @Effect()
-  LogIn: Observable<any> = this.actions
+  LogIn: Observable<User> = this.actions
     .ofType(AuthActionTypes.LOGIN)
     .map((action: LogIn) => action.payload)
     .switchMap(payload => {
       return this.authService.logIn(payload.email, payload.password)
         .map((user) => {
+          console.log('effects user',user, payload)
           return new LogInSuccess({token: user.token, email: payload.email});
         })
         .catch((error) => {
@@ -43,21 +46,22 @@ export class AuthEffects {
 
 
   @Effect({ dispatch: false })
-  LogInSuccess: Observable<any> = this.actions.pipe(
+  LogInSuccess: Observable<ApiResponse> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_SUCCESS),
-    tap((user) => {
+    tap((user: ApiResponse) => {
+      console.log('user payload',user)
       localStorage.setItem('token', user.payload.token);
       this.router.navigateByUrl('/');
     })
   );
 
   @Effect({ dispatch: false })
-  LogInFailure: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.LOGIN_FAILURE)
+  LogInFailure: Observable<ApiResponse> = this.actions.pipe(
+    ofType(AuthActionTypes.LOGIN_FAILURE),
   );
 
   @Effect()
-  SignUp: Observable<any> = this.actions
+  SignUp: Observable<User> = this.actions
     .ofType(AuthActionTypes.SIGNUP)
     .map((action: SignUp) => action.payload)
     .switchMap(payload => {
@@ -71,21 +75,21 @@ export class AuthEffects {
     });
 
   @Effect({ dispatch: false })
-  SignUpSuccess: Observable<any> = this.actions.pipe(
+  SignUpSuccess: Observable<ApiResponse> = this.actions.pipe(
     ofType(AuthActionTypes.SIGNUP_SUCCESS),
-    tap((user) => {
+    tap((user: ApiResponse) => {
       localStorage.setItem('token', user.payload.token);
       this.router.navigateByUrl('/');
     })
   );
 
   @Effect({ dispatch: false })
-  SignUpFailure: Observable<any> = this.actions.pipe(
+  SignUpFailure: Observable<ApiResponse> = this.actions.pipe(
     ofType(AuthActionTypes.SIGNUP_FAILURE)
   );
 
   @Effect({ dispatch: false })
-  public LogOut: Observable<any> = this.actions.pipe(
+  public LogOut: Observable<ApiResponse> = this.actions.pipe(
     ofType(AuthActionTypes.LOGOUT),
     tap((user) => {
       localStorage.removeItem('token');
@@ -93,9 +97,10 @@ export class AuthEffects {
   );
 
   @Effect({ dispatch: false })
-  GetStatus: Observable<any> = this.actions
+  GetStatus: Observable<User> = this.actions
     .ofType(AuthActionTypes.GET_STATUS)
     .switchMap(payload => {
+      console.log('user payload status',payload)
       return this.authService.getStatus();
     });
 

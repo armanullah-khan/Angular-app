@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { User } from 'src/app/models/user';
+import { ApiResponse } from 'src/app/models/api-response';
 
 
 export enum AuthActionTypes {
@@ -16,42 +17,39 @@ export enum AuthActionTypes {
   export class LogIn implements Action {
     readonly type = AuthActionTypes.LOGIN;
     constructor(public payload: User) {
-      console.log('action Login', payload)
+      console.log('action payload', payload)
     }
   }
   
   export class LogInSuccess implements Action {
     readonly type = AuthActionTypes.LOGIN_SUCCESS;
     constructor(public payload: User) {
-      console.log('action success', payload) 
+      console.log('action success payload', payload) 
     }
   }
   
   export class LogInFailure implements Action {
     readonly type = AuthActionTypes.LOGIN_FAILURE;
-    constructor(public payload: any) {
-      console.log('action failure', payload)
+    constructor(public payload: User) {
+      console.log('action fail payload', payload) 
     }
   }
   
   export class SignUp implements Action {
     readonly type = AuthActionTypes.SIGNUP;
     constructor(public payload: User) {
-      console.log('action signup', payload)
     }
   }
   
   export class SignUpSuccess implements Action {
     readonly type = AuthActionTypes.SIGNUP_SUCCESS;
     constructor(public payload: User) {
-      console.log('action sign success', payload)
     }
   }
   
   export class SignUpFailure implements Action {
     readonly type = AuthActionTypes.SIGNUP_FAILURE;
-    constructor(public payload: any) {
-      console.log('action sign fail', payload)
+    constructor(public payload: User) {
     }
   }
   
